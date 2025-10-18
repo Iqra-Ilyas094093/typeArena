@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:type_arena/homeScreen.dart';
-import 'package:type_arena/views/Typing_test_Screen.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:type_arena/views/homePage/home_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,10 +14,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+      theme: ThemeData.dark().copyWith(
+        textTheme: GoogleFonts.spaceGroteskTextTheme(
+          ThemeData.dark().textTheme
+        ),
+        primaryTextTheme: GoogleFonts.spaceGroteskTextTheme(),
+        primaryColor: Color(0xFF1193d4),
       ),
-      home: TypingTesttScreen()
+      home: LandingPage(),
     );
   }
 }
