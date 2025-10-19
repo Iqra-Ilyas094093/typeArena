@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:type_arena/views/authentication/login_page.dart';
 
 class LandingPage extends StatefulWidget {
   const LandingPage({super.key});
@@ -84,7 +85,7 @@ class _LandingPageState extends State<LandingPage> with SingleTickerProviderStat
                       // Login Button
                       ElevatedButton(
                         onPressed: () {
-                          // Handle login
+                         Navigator.of(context).push(MaterialPageRoute(builder: (context)=>LoginPage()));
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color(0xFF00BFFF),
@@ -252,7 +253,7 @@ class _LandingPageState extends State<LandingPage> with SingleTickerProviderStat
                   // CTA Button
                   ElevatedButton(
                     onPressed: () {
-                      // Start free lesson
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>LoginPage()));
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFF00BFFF),

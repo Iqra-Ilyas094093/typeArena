@@ -1,4 +1,8 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:type_arena/views/authentication/forgot_password_page.dart';
+import 'package:type_arena/views/authentication/register_page.dart';
+import 'package:type_arena/views/authentication/verification_page.dart';
 
 
 class LoginPage extends StatefulWidget {
@@ -200,7 +204,7 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                               TextButton(
                                 onPressed: () {
-                                  // Handle forgot password
+                                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ForgotPasswordPage()));
                                 },
                                 child: const Text(
                                   'Forgot Password?',
@@ -221,7 +225,7 @@ class _LoginPageState extends State<LoginPage> {
                             height: 48,
                             child: ElevatedButton(
                               onPressed: () {
-                                // Handle login
+                                Navigator.of(context).push(MaterialPageRoute(builder: (context)=>VerificationScreen()));
                               },
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: const Color(0xFF1193D4),
@@ -312,7 +316,7 @@ class _LoginPageState extends State<LoginPage> {
                       const SizedBox(height: 24),
 
                       // Sign Up Link
-                      const Text.rich(
+                      Text.rich(
                         TextSpan(
                           text: "Don't have an account? ",
                           style: TextStyle(
@@ -325,6 +329,9 @@ class _LoginPageState extends State<LoginPage> {
                                 color: Color(0xFF1193D4),
                                 fontWeight: FontWeight.w500,
                               ),
+                              recognizer: TapGestureRecognizer()..onTap=(){
+                                Navigator.of(context).push(MaterialPageRoute(builder: (context)=>CreateAccountPage()));
+                              }
                             ),
                           ],
                         ),

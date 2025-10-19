@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:type_arena/views/lessonsPage/lesson_page.dart';
+import 'package:type_arena/views/settings_customization/appearance.dart';
+import 'package:type_arena/views/typing_screen/typing_screen.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({super.key});
@@ -61,10 +64,12 @@ class _DashboardPageState extends State<DashboardPage> {
                 if (MediaQuery.of(context).size.width > 768)
                   Row(
                     children: [
-                      _buildNavLink('Dashboard', isActive: true),
-                      _buildNavLink('Practice'),
-                      _buildNavLink('Lessons'),
-                      _buildNavLink('Settings'),
+                      _buildNavLink('Dashboard',(){
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>DashboardPage()));
+                      }, isActive: true),
+                      _buildNavLink('Practice',(){ Navigator.of(context).push(MaterialPageRoute(builder: (context)=>TypingPracticePage()));  }),
+                      _buildNavLink('Lessons',(){Navigator.of(context).push(MaterialPageRoute(builder: (context)=>LessonsPage()));}),
+                      _buildNavLink('Settings',(){ Navigator.of(context).push(MaterialPageRoute(builder: (context)=>SettingsPage())); }),
                     ],
                   ),
                 const SizedBox(width: 32),
@@ -118,7 +123,7 @@ class _DashboardPageState extends State<DashboardPage> {
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
                     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
+                      crossAxisCount: 4,
                       mainAxisSpacing: 16,
                       crossAxisSpacing: 16,
                       childAspectRatio: 1.5,
@@ -400,15 +405,18 @@ class _DashboardPageState extends State<DashboardPage> {
     );
   }
 
-  Widget _buildNavLink(String text, {bool isActive = false}) {
+  Widget _buildNavLink(String text,VoidCallback ontap, {bool isActive = false}) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: Text(
-        text,
-        style: GoogleFonts.spaceGrotesk(
-          color: isActive ? const Color(0xFF1193D4) : Colors.white,
-          fontSize: 14,
-          fontWeight: FontWeight.w500,
+      child: GestureDetector(
+        onTap: ontap,
+        child: Text(
+          text,
+          style: GoogleFonts.spaceGrotesk(
+            color: isActive ? const Color(0xFF1193D4) : Colors.white,
+            fontSize: 14,
+            fontWeight: FontWeight.w500,
+          ),
         ),
       ),
     );

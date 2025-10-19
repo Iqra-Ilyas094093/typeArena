@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:type_arena/views/authentication/login_page.dart';
+import 'package:type_arena/views/authentication/verification_page.dart';
 
 class CreateAccountPage extends StatefulWidget {
   const CreateAccountPage({super.key});
@@ -349,7 +351,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                                   height: 48,
                                   child: ElevatedButton(
                                     onPressed: () {
-                                      // Handle account creation
+                                      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>VerificationScreen()));
                                     },
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: const Color(0xFF1193D4),
@@ -511,7 +513,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                                       const SizedBox(width: 4),
                                       GestureDetector(
                                         onTap: () {
-                                          // Navigate to login page
+                                          Navigator.of(context).push(MaterialPageRoute(builder: (context)=>LoginPage()));
                                         },
                                         child: Text(
                                           'Log in',

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:type_arena/views/settings_customization/account_setting.dart';
+import 'package:type_arena/views/settings_customization/typing_setting.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -67,16 +69,25 @@ class _SettingsPageState extends State<SettingsPage> {
                     child: Column(
                       children: [
                         _buildNavItem(
+                          ontap: (){
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context)=>SettingsPage()));
+                          },
                           icon: Icons.palette,
                           title: 'Appearance',
                           isActive: true,
                         ),
                         _buildNavItem(
+                          ontap: (){
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context)=>TypingSettingsPage()));
+                          },
                           icon: Icons.code,
                           title: 'Typing',
                           isActive: false,
                         ),
                         _buildNavItem(
+                          ontap: (){
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context)=>AccountSettingsPage()));
+                          },
                           icon: Icons.person,
                           title: 'Account',
                           isActive: false,
@@ -308,6 +319,7 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   Widget _buildNavItem({
+    required VoidCallback ontap,
     required IconData icon,
     required String title,
     required bool isActive,
@@ -321,9 +333,7 @@ class _SettingsPageState extends State<SettingsPage> {
       child: Material(
         color: Colors.transparent,
         child: InkWell(
-          onTap: () {
-            // Handle navigation
-          },
+          onTap: ontap,
           borderRadius: BorderRadius.circular(8),
           child: Padding(
             padding: const EdgeInsets.all(12),

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:type_arena/views/dashboard/dashboard_page.dart';
 
 class VerificationScreen extends StatefulWidget {
   const VerificationScreen({super.key});
@@ -76,7 +77,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
     // Combine all OTP digits
     String code = _controllers.map((controller) => controller.text).join();
     print('Verifying code: $code');
-
+    Navigator.of(context).push(MaterialPageRoute(builder: (context)=>DashboardPage()));
     // Here you would typically verify the code with your backend
     // For now, just show a snackbar
     ScaffoldMessenger.of(context).showSnackBar(
