@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:type_arena/views/authentication/login_page.dart';
+import 'package:type_arena/views/widgets/auth_gate.dart';
 
 class LandingPage extends StatefulWidget {
   const LandingPage({super.key});
@@ -74,18 +75,10 @@ class _LandingPageState extends State<LandingPage> with SingleTickerProviderStat
                   // Navigation and Login
                   Row(
                     children: [
-                      // Navigation Links
-                      Row(
-                        children: [
-                          _buildNavLink('Lessons'),
-                          _buildNavLink('About'),
-                        ],
-                      ),
-                      const SizedBox(width: 32),
                       // Login Button
                       ElevatedButton(
                         onPressed: () {
-                         Navigator.of(context).push(MaterialPageRoute(builder: (context)=>LoginPage()));
+                         Navigator.of(context).push(MaterialPageRoute(builder: (context)=>AuthGate()));
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color(0xFF00BFFF),
@@ -504,7 +497,7 @@ class _LandingPageState extends State<LandingPage> with SingleTickerProviderStat
           image: NetworkImage(imageUrl),
           fit: BoxFit.cover,
           colorFilter: ColorFilter.mode(
-            Colors.black.withOpacity(0.6),
+            Colors.black.withOpacity(0.4),
             BlendMode.darken,
           ),
         ),

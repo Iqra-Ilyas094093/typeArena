@@ -2,10 +2,13 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'package:type_arena/view_model/auth_view_model.dart';
 import 'package:type_arena/views/dashboard/dashboard_page.dart';
 
 class VerificationScreen extends StatefulWidget {
-  const VerificationScreen({super.key});
+  final String email;
+  const VerificationScreen({super.key, required this.email});
 
   @override
   State<VerificationScreen> createState() => _VerificationScreenState();
@@ -102,9 +105,13 @@ class _VerificationScreenState extends State<VerificationScreen> {
       ),
     );
   }
+  String getOtp(){
+    return _controllers.map((e)=>e.text).join('');
+  }
 
   @override
   Widget build(BuildContext context) {
+    final authVM = context.watch<AuthViewModel>();
     return Scaffold(
       backgroundColor: const Color(0xFF101C22),
       body: SafeArea(
@@ -213,14 +220,31 @@ class _VerificationScreenState extends State<VerificationScreen> {
                         constraints: const BoxConstraints(maxWidth: 200),
                         height: 48,
                         child: ElevatedButton(
-                          onPressed: _isAllFieldsFilled() ? _verifyCode : null,
+                          onPressed: authVM.isLoading
+                              ? null
+                              : () async {
+                            final otp = getOtp();
+                            final isVerified =
+                            await authVM.verifyOtp(widget.email,otp);
+
+                            if (isVerified && context.mounted) {
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (_) => const DashboardPage(),
+                                ),
+                              );
+                            }
+                          },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xFF1193D4),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8),
                             ),
                           ),
-                          child: Text(
+                          child: authVM.isLoading
+                              ? const CircularProgressIndicator()
+                              : Text(
                             'Verify',
                             style: GoogleFonts.spaceGrotesk(
                               color: Colors.white,
